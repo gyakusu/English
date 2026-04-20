@@ -20,7 +20,8 @@ export async function ensurePat(): Promise<string> {
 
   return new Promise<string>((resolve, reject) => {
     const dialog = document.createElement('dialog');
-    dialog.style.cssText = 'padding: 1.5rem; border-radius: 8px; border: 1px solid #ccc; min-width: 320px;';
+    dialog.style.cssText =
+      'padding: 1.5rem; border-radius: 8px; border: 1px solid #ccc; min-width: 320px;';
 
     const p = document.createElement('p');
     p.textContent = 'GitHubのPersonal Access Token (PAT) を入力してください';
@@ -28,10 +29,12 @@ export async function ensurePat(): Promise<string> {
     const input = document.createElement('input');
     input.type = 'password';
     input.id = 'pat-input';
-    input.style.cssText = 'display: block; width: 100%; margin: 0.75rem 0; padding: 0.4rem; box-sizing: border-box;';
+    input.style.cssText =
+      'display: block; width: 100%; margin: 0.75rem 0; padding: 0.4rem; box-sizing: border-box;';
 
     const btnRow = document.createElement('div');
-    btnRow.style.cssText = 'display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 0.75rem;';
+    btnRow.style.cssText =
+      'display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 0.75rem;';
 
     const cancelBtn = document.createElement('button');
     cancelBtn.type = 'button';
