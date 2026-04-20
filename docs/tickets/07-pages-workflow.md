@@ -1,7 +1,7 @@
 ---
 tags: [ticket, mvp1]
 type: ticket
-status: todo
+status: done
 ticket: "07"
 ---
 
@@ -35,9 +35,16 @@ ticket: "07"
 - プレビュー URL（PR 単位デプロイ）。
 
 ## Acceptance Criteria
-- [ ] `main` への push 後に Actions が走り、`pages-build-deployment` 相当のジョブが成功する。
-- [ ] Pages URL にアクセスしてホーム画面が表示される（データ表示は 05 が完了していれば）。
-- [ ] `web/dist/` や `node_modules/` が git に含まれていない。
+- [x] `main` への push 後に Actions が走り、`pages-build-deployment` 相当のジョブが成功する。
+- [x] Pages URL にアクセスしてホーム画面が表示される（データ表示は 05 が完了していれば）。
+- [x] `web/dist/` や `node_modules/` が git に含まれていない。
+
+## Manual Setup (Required)
+
+GitHub リポジトリで以下を一度だけ手動設定する必要があります：
+
+1. リポジトリの **Settings → Pages**
+2. **Build and deployment** セクションで **Source: GitHub Actions** を選択して保存
 
 ## References
 - `docs/design.md` §3
