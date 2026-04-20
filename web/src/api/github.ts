@@ -15,7 +15,7 @@ export async function listReading(): Promise<{ name: string; path: string; sha: 
   if (!res.ok) {
     throw new Error(`listReading failed: ${String(res.status)} ${res.statusText}`);
   }
-  const data = await res.json() as { name: string; path: string; sha: string }[];
+  const data = (await res.json()) as { name: string; path: string; sha: string }[];
   return data;
 }
 
@@ -25,7 +25,7 @@ export async function getContent(path: string): Promise<{ content: string; sha: 
   if (!res.ok) {
     throw new Error(`getContent failed: ${String(res.status)} ${res.statusText}`);
   }
-  const data = await res.json() as { content: string; sha: string };
+  const data = (await res.json()) as { content: string; sha: string };
   const b64 = data.content.replace(/\n/g, '');
   const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
   const decoded = new TextDecoder().decode(bytes);
@@ -55,7 +55,7 @@ export async function putContent(opts: {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${opts.pat}`,
+      Authorization: `Bearer ${opts.pat}`,
     },
     body: JSON.stringify(body),
   });

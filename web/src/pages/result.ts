@@ -85,7 +85,7 @@ export function renderResult(): void {
   const breakdownRows = confLabels
     .map(
       (label) =>
-        `<tr><td>${label}</td><td>${String(breakdown[label].correct)}</td><td>${String(breakdown[label].incorrect)}</td></tr>`
+        `<tr><td>${label}</td><td>${String(breakdown[label].correct)}</td><td>${String(breakdown[label].incorrect)}</td></tr>`,
     )
     .join('\n');
 

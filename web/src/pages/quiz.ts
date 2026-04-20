@@ -29,7 +29,7 @@ function renderQuizHTML(source: MockTestSource, startTime: number): string {
           (c) => `<label class="choice-label">
   <input type="radio" name="q${String(q.id)}" value="${c.key}" />
   (${c.key}) ${c.text}
-</label>`
+</label>`,
         )
         .join('\n');
 
@@ -114,7 +114,7 @@ export async function renderQuiz(testId: string): Promise<void> {
 
       for (const q of source.questions) {
         const radios = mainContent.querySelectorAll<HTMLInputElement>(
-          `input[name="q${String(q.id)}"]:checked`
+          `input[name="q${String(q.id)}"]:checked`,
         );
         if (radios.length > 0) {
           const checked = radios[0];
@@ -124,7 +124,7 @@ export async function renderQuiz(testId: string): Promise<void> {
         }
 
         const activeConf = mainContent.querySelector<HTMLElement>(
-          `.confidence-group[data-qid="${String(q.id)}"] .conf-btn.conf-active`
+          `.confidence-group[data-qid="${String(q.id)}"] .conf-btn.conf-active`,
         );
         if (activeConf !== null) {
           const val = activeConf.dataset['value'];

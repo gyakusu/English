@@ -55,13 +55,13 @@ export async function renderHome(): Promise<void> {
       }
 
       return { testId, testName, latestScore, attemptCount };
-    })
+    }),
   );
 
   const listItems = items
     .map(
       (item) =>
-        `<li><a href="#/quiz/${item.testId}">${item.testName}</a> — スコア: ${item.latestScore} — 試行: ${String(item.attemptCount)}回</li>`
+        `<li><a href="#/quiz/${item.testId}">${item.testName}</a> — スコア: ${item.latestScore} — 試行: ${String(item.attemptCount)}回</li>`,
     )
     .join('\n');
 

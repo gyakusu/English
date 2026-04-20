@@ -79,10 +79,7 @@ function parseChoicesFromBlock(block: string): Choice[] {
   return choices;
 }
 
-function extractQuestions(
-  markdown: string,
-  answers: string[]
-): Omit<Question, 'explanation'>[] {
+function extractQuestions(markdown: string, answers: string[]): Omit<Question, 'explanation'>[] {
   // From ### [Questions] to ### 💡 解答・解説
   const questionsHeading = /#{3,}\s*\[Questions\]/i;
   const explanationHeading = /#{3,}\s*💡/;
@@ -106,7 +103,7 @@ function extractQuestions(
 
     // stem is the first line (up to first newline or **)
     const stemMatch = /^([^*\n]+)\*\*/.exec(rest);
-    const stem = stemMatch ? (stemMatch[1] ?? '').trim() : rest.split('\n')[0]?.trim() ?? '';
+    const stem = stemMatch ? (stemMatch[1] ?? '').trim() : (rest.split('\n')[0]?.trim() ?? '');
 
     const choices = parseChoicesFromBlock(rest);
 
@@ -130,7 +127,8 @@ function extractExplanations(markdown: string): Map<number, string> {
   const section = markdown.slice(startIdx);
 
   // Match blocks like **N. 正解: (X)** ... **解説:** ...
-  const blockRegex = /\*\*(\d+)\.\s*正解[：:]\s*\([A-D]\)\*\*\s*\r?\n\s*\*\*解説[：:]\*\*\s*([^\r\n>]+)/g;
+  const blockRegex =
+    /\*\*(\d+)\.\s*正解[：:]\s*\([A-D]\)\*\*\s*\r?\n\s*\*\*解説[：:]\*\*\s*([^\r\n>]+)/g;
   let m: RegExpExecArray | null;
   while ((m = blockRegex.exec(section)) !== null) {
     const id = parseInt(m[1] ?? '0', 10);
