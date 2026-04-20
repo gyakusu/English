@@ -1,0 +1,22 @@
+{
+  "name": "english-vault",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Obsidian vault + Vite/TS learning site (see docs/design.md)",
+  "type": "module",
+  "workspaces": [
+    "web"
+  ],
+  "scripts": {
+    "prepare": "husky",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "lint": "npm --prefix web run lint",
+    "typecheck": "npm --prefix web run typecheck"
+  },
+  "devDependencies": {
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3"
+  }
+}

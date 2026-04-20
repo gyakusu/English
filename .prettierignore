@@ -1,0 +1,15 @@
+node_modules
+dist
+.husky
+package-lock.json
+*.min.*
+
+# Obsidian vault content — human-written notes, not auto-formatted
+Grammar/
+Vocabulary/
+Reading/
+docs/
+TODO.md
+Welcome.md
+README.md
+CLAUDE.md
