@@ -39,7 +39,7 @@ export async function appendAttempt(result: QuizResult): Promise<void> {
     const myAnswer = result.userAnswers.get(q.id) ?? '未回答';
     if (myAnswer !== q.correct) {
       const conf = result.confidence.get(q.id) ?? '';
-      mistakeRows.push(`| ${q.id} | ${myAnswer} | ${q.correct} | ${conf} |`);
+      mistakeRows.push(`| ${String(q.id)} | ${myAnswer} | ${q.correct} | ${conf} |`);
     }
   }
 
@@ -51,7 +51,7 @@ export async function appendAttempt(result: QuizResult): Promise<void> {
 
   const appendBlock =
     `\n## Attempt ${iso}\n` +
-    `- score: ${correctCount}/${total}\n` +
+    `- score: ${String(correctCount)}/${String(total)}\n` +
     `- elapsed: ${elapsed}\n` +
     `- answers: ${answersStr}\n` +
     `- mistakes:\n\n` +

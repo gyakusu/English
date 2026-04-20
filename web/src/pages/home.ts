@@ -4,7 +4,8 @@ import { parseMockTestSource } from '../parser/mockTest.js';
 import { parseAttempts } from '../parser/attempts.js';
 
 export async function renderHome(): Promise<void> {
-  const mainContent = document.getElementById('main-content')!;
+  const mainContent = document.getElementById('main-content');
+  if (mainContent === null) return;
   mainContent.innerHTML = '<p>読み込み中...</p>';
 
   let files: { name: string; path: string; sha: string }[];
@@ -60,7 +61,7 @@ export async function renderHome(): Promise<void> {
   const listItems = items
     .map(
       (item) =>
-        `<li><a href="#/quiz/${item.testId}">${item.testName}</a> — スコア: ${item.latestScore} — 試行: ${item.attemptCount}回</li>`
+        `<li><a href="#/quiz/${item.testId}">${item.testName}</a> — スコア: ${item.latestScore} — 試行: ${String(item.attemptCount)}回</li>`
     )
     .join('\n');
 
