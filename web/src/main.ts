@@ -21,8 +21,7 @@ async function route(): Promise<void> {
     const testId = hash.slice('#/quiz/'.length);
     await renderQuiz(testId);
   } else if (hash.startsWith('#/result/')) {
-    const testId = hash.slice('#/result/'.length);
-    await renderResult(testId);
+    renderResult();
   }
 }
 

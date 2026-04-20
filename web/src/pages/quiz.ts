@@ -15,32 +15,32 @@ function formatTime(ms: number): string {
   const totalSec = Math.floor(ms / 1000);
   const min = Math.floor(totalSec / 60);
   const sec = totalSec % 60;
-  return `${min}:${sec.toString().padStart(2, '0')}`;
+  return `${String(min)}:${sec.toString().padStart(2, '0')}`;
 }
 
 function renderQuizHTML(source: MockTestSource, startTime: number): string {
   const totalGoalSec = source.timeGoalMin * 60;
-  const goalMin = source.timeGoalMin;
+  const goalMinStr = String(source.timeGoalMin);
 
   const questionsHTML = source.questions
     .map((q) => {
       const choicesHTML = q.choices
         .map(
           (c) => `<label class="choice-label">
-  <input type="radio" name="q${q.id}" value="${c.key}" />
+  <input type="radio" name="q${String(q.id)}" value="${c.key}" />
   (${c.key}) ${c.text}
 </label>`
         )
         .join('\n');
 
-      const confidenceHTML = `<div class="confidence-group" data-qid="${q.id}">
-  <button type="button" class="conf-btn" data-qid="${q.id}" data-value="確信">確信</button>
-  <button type="button" class="conf-btn" data-qid="${q.id}" data-value="迷い">迷い</button>
-  <button type="button" class="conf-btn" data-qid="${q.id}" data-value="勘">勘</button>
+      const confidenceHTML = `<div class="confidence-group" data-qid="${String(q.id)}">
+  <button type="button" class="conf-btn" data-qid="${String(q.id)}" data-value="確信">確信</button>
+  <button type="button" class="conf-btn" data-qid="${String(q.id)}" data-value="迷い">迷い</button>
+  <button type="button" class="conf-btn" data-qid="${String(q.id)}" data-value="勘">勘</button>
 </div>`;
 
-      return `<div class="question" data-qid="${q.id}">
-  <p><strong>Q${q.id}. ${q.stem}</strong></p>
+      return `<div class="question" data-qid="${String(q.id)}">
+  <p><strong>Q${String(q.id)}. ${q.stem}</strong></p>
   <div class="choices">
 ${choicesHTML}
   </div>
@@ -52,17 +52,18 @@ ${confidenceHTML}
   const elapsed = Date.now() - startTime;
   const elapsedStr = formatTime(elapsed);
 
-  return `<div id="timer">経過: ${elapsedStr} / 目安: ${goalMin}min</div>
+  return `<div id="timer">経過: ${elapsedStr} / 目安: ${goalMinStr}min</div>
 <div class="passage">${source.passage.replace(/\n/g, '<br />')}</div>
 ${questionsHTML}
 <button id="submit-btn">提出</button>
-<input type="hidden" id="total-goal-sec" value="${totalGoalSec}" />`;
+<input type="hidden" id="total-goal-sec" value="${String(totalGoalSec)}" />`;
 }
 
 export async function renderQuiz(testId: string): Promise<void> {
   stopTimer();
 
-  const mainContent = document.getElementById('main-content')!;
+  const mainContent = document.getElementById('main-content');
+  if (mainContent === null) return;
   mainContent.innerHTML = '<p>読み込み中...</p>';
 
   let source: MockTestSource;
@@ -82,8 +83,7 @@ export async function renderQuiz(testId: string): Promise<void> {
     const timerEl = document.getElementById('timer');
     if (timerEl) {
       const elapsed = Date.now() - startTime;
-      const goalMin = source.timeGoalMin;
-      timerEl.textContent = `経過: ${formatTime(elapsed)} / 目安: ${goalMin}min`;
+      timerEl.textContent = `経過: ${formatTime(elapsed)} / 目安: ${String(source.timeGoalMin)}min`;
     }
   }, 1000);
 
@@ -114,7 +114,7 @@ export async function renderQuiz(testId: string): Promise<void> {
 
       for (const q of source.questions) {
         const radios = mainContent.querySelectorAll<HTMLInputElement>(
-          `input[name="q${q.id}"]:checked`
+          `input[name="q${String(q.id)}"]:checked`
         );
         if (radios.length > 0) {
           const checked = radios[0];
@@ -124,7 +124,7 @@ export async function renderQuiz(testId: string): Promise<void> {
         }
 
         const activeConf = mainContent.querySelector<HTMLElement>(
-          `.confidence-group[data-qid="${q.id}"] .conf-btn.conf-active`
+          `.confidence-group[data-qid="${String(q.id)}"] .conf-btn.conf-active`
         );
         if (activeConf !== null) {
           const val = activeConf.dataset['value'];

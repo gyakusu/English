@@ -5,7 +5,7 @@ function formatTime(ms: number): string {
   const totalSec = Math.floor(ms / 1000);
   const min = Math.floor(totalSec / 60);
   const sec = totalSec % 60;
-  return `${min}:${sec.toString().padStart(2, '0')}`;
+  return `${String(min)}:${sec.toString().padStart(2, '0')}`;
 }
 
 function showToast(message: string, isError = false): void {
@@ -39,8 +39,9 @@ function showToast(message: string, isError = false): void {
   }, 3000);
 }
 
-export async function renderResult(_testId: string): Promise<void> {
-  const mainContent = document.getElementById('main-content')!;
+export function renderResult(): void {
+  const mainContent = document.getElementById('main-content');
+  if (mainContent === null) return;
 
   const result = getResult();
   if (result === null) {
@@ -84,7 +85,7 @@ export async function renderResult(_testId: string): Promise<void> {
   const breakdownRows = confLabels
     .map(
       (label) =>
-        `<tr><td>${label}</td><td>${breakdown[label].correct}</td><td>${breakdown[label].incorrect}</td></tr>`
+        `<tr><td>${label}</td><td>${String(breakdown[label].correct)}</td><td>${String(breakdown[label].incorrect)}</td></tr>`
     )
     .join('\n');
 
@@ -96,7 +97,7 @@ export async function renderResult(_testId: string): Promise<void> {
       const mark = isCorrect ? '✓' : '✗';
       const explanation = q.explanation || '';
       return `<tr>
-  <td>Q${q.id}</td>
+  <td>Q${String(q.id)}</td>
   <td>${mark}</td>
   <td>${userAnswer}</td>
   <td>${q.correct}</td>
@@ -106,7 +107,7 @@ export async function renderResult(_testId: string): Promise<void> {
     .join('\n');
 
   mainContent.innerHTML = `<h1>結果</h1>
-<p>スコア: ${correct}/${total}</p>
+<p>スコア: ${String(correct)}/${String(total)}</p>
 <p>経過時間: ${formatTime(elapsedMs)}</p>
 
 <h2>確信度別内訳</h2>
