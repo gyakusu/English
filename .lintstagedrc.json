@@ -1,11 +1,5 @@
 {
-  "*.{js,jsx,ts,tsx,json,md,yml,yaml,css,html}": [
-    "prettier --write --ignore-unknown"
-  ],
-  "web/**/*.{js,jsx,ts,tsx}": [
-    "bash -c 'npm --prefix web run lint'"
-  ],
-  "web/**/*.{ts,tsx}": [
-    "bash -c 'npm --prefix web run typecheck'"
-  ]
+  "*.{js,jsx,ts,tsx,json,md,yml,yaml,css,html}": ["prettier --write --ignore-unknown"],
+  "web/**/*.{js,jsx,ts,tsx}": ["bash -c 'npm --prefix web run lint'"],
+  "web/**/*.{ts,tsx}": ["bash -c 'npm --prefix web run typecheck'"]
 }
