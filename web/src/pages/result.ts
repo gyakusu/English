@@ -1,10 +1,42 @@
 import { getResult } from '../store.js';
+import { appendAttempt } from '../commit/appendAttempt.js';
 
 function formatTime(ms: number): string {
   const totalSec = Math.floor(ms / 1000);
   const min = Math.floor(totalSec / 60);
   const sec = totalSec % 60;
   return `${min}:${sec.toString().padStart(2, '0')}`;
+}
+
+function showToast(message: string, isError = false): void {
+  const toast = document.createElement('div');
+  toast.style.cssText = [
+    'position: fixed',
+    'bottom: 1.5rem',
+    'left: 50%',
+    'transform: translateX(-50%)',
+    'padding: 0.75rem 1.25rem',
+    'border-radius: 6px',
+    'color: #fff',
+    `background: ${isError ? '#c0392b' : '#27ae60'}`,
+    'box-shadow: 0 2px 8px rgba(0,0,0,0.3)',
+    'z-index: 9999',
+    'display: flex',
+    'align-items: center',
+    'gap: 0.75rem',
+    'font-size: 0.95rem',
+  ].join('; ');
+
+  const text = document.createElement('span');
+  text.textContent = message;
+  toast.appendChild(text);
+
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    if (document.body.contains(toast)) {
+      document.body.removeChild(toast);
+    }
+  }, 3000);
 }
 
 export async function renderResult(_testId: string): Promise<void> {
@@ -102,8 +134,69 @@ ${questionRows}
 
   const saveBtn = document.getElementById('save-btn');
   if (saveBtn !== null) {
-    saveBtn.addEventListener('click', () => {
-      alert('保存機能は近日実装予定');
-    });
+    const doSave = (): void => {
+      saveBtn.setAttribute('disabled', '');
+      appendAttempt(result)
+        .then(() => {
+          showToast('保存しました ✓');
+        })
+        .catch((err: unknown) => {
+          const msg = err instanceof Error ? err.message : '不明なエラー';
+          const toastMsg = `保存失敗: ${msg}`;
+          showToastWithRetry(toastMsg, doSave);
+          saveBtn.removeAttribute('disabled');
+        });
+    };
+    saveBtn.addEventListener('click', doSave);
   }
+}
+
+function showToastWithRetry(message: string, onRetry: () => void): void {
+  const toast = document.createElement('div');
+  toast.style.cssText = [
+    'position: fixed',
+    'bottom: 1.5rem',
+    'left: 50%',
+    'transform: translateX(-50%)',
+    'padding: 0.75rem 1.25rem',
+    'border-radius: 6px',
+    'color: #fff',
+    'background: #c0392b',
+    'box-shadow: 0 2px 8px rgba(0,0,0,0.3)',
+    'z-index: 9999',
+    'display: flex',
+    'align-items: center',
+    'gap: 0.75rem',
+    'font-size: 0.95rem',
+  ].join('; ');
+
+  const text = document.createElement('span');
+  text.textContent = message;
+  toast.appendChild(text);
+
+  const retryBtn = document.createElement('button');
+  retryBtn.textContent = 'リトライ';
+  retryBtn.style.cssText = [
+    'background: rgba(255,255,255,0.2)',
+    'border: 1px solid rgba(255,255,255,0.5)',
+    'color: #fff',
+    'border-radius: 4px',
+    'padding: 0.2rem 0.6rem',
+    'cursor: pointer',
+    'font-size: 0.9rem',
+  ].join('; ');
+  retryBtn.addEventListener('click', () => {
+    if (document.body.contains(toast)) {
+      document.body.removeChild(toast);
+    }
+    onRetry();
+  });
+  toast.appendChild(retryBtn);
+
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    if (document.body.contains(toast)) {
+      document.body.removeChild(toast);
+    }
+  }, 3000);
 }
