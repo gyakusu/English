@@ -1,3 +1,8 @@
+---
+test: "MockTest2"
+time_goal_min: 5
+answers: ["B", "C"]
+---
 ### Part 7: Double Passage (Advanced)
 **Time Goal:** 5 mins
 

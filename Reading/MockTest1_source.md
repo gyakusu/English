@@ -1,3 +1,8 @@
+---
+test: "MockTest1"
+time_goal_min: 3
+answers: ["B", "C"]
+---
 ## 📝 Part 7: Single Passage (E-mail)
 **Time Goal:** 3 mins
 
