@@ -1,0 +1,51 @@
+body {
+  max-width: 600px;
+  margin: auto;
+  padding: 1rem;
+  font-family: sans-serif;
+  min-width: 360px;
+}
+
+.test-list {
+  padding: 0;
+}
+
+.test-list li {
+  padding: 0.5rem 0;
+  list-style: none;
+}
+
+.passage {
+  background: #f5f5f5;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.question {
+  margin: 1rem 0;
+}
+
+.choices label,
+.choice-label {
+  display: block;
+  padding: 0.25rem;
+}
+
+.confidence-group button {
+  margin: 0.25rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.confidence-group .conf-active {
+  font-weight: bold;
+  outline: 2px solid currentColor;
+}
+
+button {
+  min-height: 44px;
+}
+
+a {
+  color: inherit;
+}
