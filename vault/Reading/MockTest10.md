@@ -20,3 +20,12 @@ score_part7:
 
 ## New words → [[Vocabulary/words]]
 - 
+
+## Attempt 2026-04-21T22:27:27.622+09:00
+- score: 2/2
+- elapsed: 00:00:09
+- answers: [C, B]
+- mistakes:
+
+| Q | My answer | Correct | Confidence |
+|---|-----------|---------|------------|
