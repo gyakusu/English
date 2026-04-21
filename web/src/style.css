@@ -49,3 +49,124 @@ button {
 a {
   color: inherit;
 }
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.pat-status {
+  font-size: 0.9rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  line-height: 1.4;
+}
+
+.pat-status--ok {
+  color: #fff;
+  background: #27ae60;
+}
+
+.pat-status--missing {
+  color: #555;
+  background: #eee;
+  border: 1px solid #ccc;
+}
+
+.app-header button {
+  min-height: 32px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem;
+}
+
+.pat-panel {
+  padding: 1rem;
+  margin: 0 0 1.5rem;
+  background: #f5f5f5;
+  border-radius: 6px;
+  border-left: 4px solid #ccc;
+}
+
+.pat-panel--ok {
+  border-left-color: #27ae60;
+}
+
+.pat-panel--missing {
+  border-left-color: #c0392b;
+}
+
+.pat-panel__heading {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.pat-panel__status {
+  margin: 0.25rem 0 0.5rem;
+  font-size: 0.95rem;
+}
+
+.pat-panel__icon {
+  display: inline-block;
+  margin-right: 0.25rem;
+}
+
+.pat-panel--ok .pat-panel__icon {
+  color: #27ae60;
+}
+
+.pat-panel--missing .pat-panel__icon {
+  color: #c0392b;
+}
+
+.pat-panel__status code {
+  background: #fff;
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.pat-panel__help {
+  margin: 0.5rem 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.pat-panel__label {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.pat-panel__input-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.pat-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.4rem;
+  box-sizing: border-box;
+  min-height: 44px;
+  font-family: monospace;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.pat-toggle {
+  padding: 0 0.75rem;
+  white-space: nowrap;
+}
+
+.pat-panel__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}

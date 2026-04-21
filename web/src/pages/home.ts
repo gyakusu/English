@@ -3,17 +3,28 @@ import { cachedFetchRaw } from '../cache.js';
 import { VAULT_READING_DIR } from '../config.js';
 import { parseMockTestSource } from '../parser/mockTest.js';
 import { parseAttempts } from '../parser/attempts.js';
+import { renderPatPanel } from '../auth/pat.js';
 
 export async function renderHome(): Promise<void> {
   const mainContent = document.getElementById('main-content');
   if (mainContent === null) return;
-  mainContent.innerHTML = '<p>読み込み中...</p>';
+
+  mainContent.innerHTML = `<h1>Home (MVP1)</h1>
+<section id="pat-panel-slot"></section>
+<div id="test-list-slot"><p>読み込み中...</p></div>`;
+
+  const panelSlot = document.getElementById('pat-panel-slot');
+  if (panelSlot !== null) renderPatPanel(panelSlot);
+
+  const listSlot = document.getElementById('test-list-slot');
+  if (listSlot === null) return;
 
   let files: { name: string; path: string; sha: string }[];
   try {
     files = await listReading();
   } catch (e) {
-    mainContent.innerHTML = `<p>エラー: ${String(e)}</p>`;
+    listSlot.innerHTML = `<p>エラー: ${String(e)}</p>
+<p>PAT が未設定の場合、上の「GitHub PAT」で設定してから再読み込みしてください。</p>`;
     return;
   }
 
@@ -66,8 +77,7 @@ export async function renderHome(): Promise<void> {
     )
     .join('\n');
 
-  mainContent.innerHTML = `<h1>Home (MVP1)</h1>
-<ul class="test-list">
+  listSlot.innerHTML = `<ul class="test-list">
 ${listItems}
 </ul>`;
 }
