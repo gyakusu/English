@@ -6,6 +6,7 @@ on:
     paths:
       - 'web/**'
       - '.github/workflows/pages.yml'
+      - 'Reading/**'
   workflow_dispatch:
 
 permissions:
