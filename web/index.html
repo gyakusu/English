@@ -6,8 +6,11 @@
     <title>English Learning</title>
   </head>
   <body>
-    <header>
-      <button id="clear-pat-btn">PAT をクリア</button>
+    <header class="app-header">
+      <span id="pat-status" class="pat-status pat-status--missing" aria-live="polite"
+        >PAT: 未設定</span
+      >
+      <button id="clear-pat-btn" type="button" hidden>クリア</button>
     </header>
     <main id="main-content"></main>
     <script type="module" src="/src/main.ts"></script>

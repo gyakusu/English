@@ -2,14 +2,14 @@ import './style.css';
 import { renderHome } from './pages/home.js';
 import { renderQuiz } from './pages/quiz.js';
 import { renderResult } from './pages/result.js';
-import { clearPat } from './auth/pat.js';
+import { clearPat, renderPatStatusBadge } from './auth/pat.js';
 
 async function route(): Promise<void> {
   const hash = location.hash;
 
   // Ensure #main-content exists
   let main = document.getElementById('main-content');
-  if (!main) {
+  if (main === null) {
     main = document.createElement('main');
     main.id = 'main-content';
     document.body.appendChild(main);
@@ -25,13 +25,18 @@ async function route(): Promise<void> {
   }
 }
 
-window.addEventListener('hashchange', () => void route());
+window.addEventListener('hashchange', () => {
+  void route();
+});
 void route();
 
+const patStatusEl = document.getElementById('pat-status');
 const clearPatBtn = document.getElementById('clear-pat-btn');
-if (clearPatBtn !== null) {
+if (patStatusEl !== null && clearPatBtn instanceof HTMLButtonElement) {
+  renderPatStatusBadge(patStatusEl, clearPatBtn);
   clearPatBtn.addEventListener('click', () => {
-    clearPat();
-    alert('PATをクリアしました');
+    if (confirm('PAT をクリアしますか？')) {
+      clearPat();
+    }
   });
 }
