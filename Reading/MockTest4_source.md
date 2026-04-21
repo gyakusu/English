@@ -1,5 +1,5 @@
 ---
-test: "MockTest3_P2"
+test: "MockTest4"
 time_goal_min: 3
 answers: ["A", "C"]
 ---
