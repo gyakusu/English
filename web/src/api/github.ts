@@ -1,4 +1,4 @@
-import { OWNER, REPO, BRANCH } from '../config.js';
+import { OWNER, REPO, BRANCH, VAULT_READING_DIR } from '../config.js';
 
 export async function fetchRaw(path: string): Promise<string> {
   const url = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${path}`;
@@ -10,7 +10,7 @@ export async function fetchRaw(path: string): Promise<string> {
 }
 
 export async function listReading(): Promise<{ name: string; path: string; sha: string }[]> {
-  const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/Reading`;
+  const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${VAULT_READING_DIR}`;
   const res = await fetch(url);
   if (!res.ok) {
     throw new Error(`listReading failed: ${String(res.status)} ${res.statusText}`);

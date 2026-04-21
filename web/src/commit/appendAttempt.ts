@@ -1,5 +1,6 @@
 import { getContent, putContent } from '../api/github.js';
 import { ensurePat } from '../auth/pat.js';
+import { VAULT_READING_DIR } from '../config.js';
 import { QuizResult } from '../store.js';
 
 function formatElapsed(ms: number): string {
@@ -59,7 +60,7 @@ export async function appendAttempt(result: QuizResult): Promise<void> {
     (mistakeRows.length > 0 ? '\n' : '');
 
   // 7. Build path
-  const path = `Reading/${result.testId}.md`;
+  const path = `${VAULT_READING_DIR}/${result.testId}.md`;
 
   // 8. Get current content and sha
   const { content, sha } = await getContent(path);

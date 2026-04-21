@@ -1,5 +1,6 @@
 import { listReading } from '../api/github.js';
 import { cachedFetchRaw } from '../cache.js';
+import { VAULT_READING_DIR } from '../config.js';
 import { parseMockTestSource } from '../parser/mockTest.js';
 import { parseAttempts } from '../parser/attempts.js';
 
@@ -44,7 +45,7 @@ export async function renderHome(): Promise<void> {
       }
 
       try {
-        const attemptMd = await cachedFetchRaw(`Reading/${testId}.md`);
+        const attemptMd = await cachedFetchRaw(`${VAULT_READING_DIR}/${testId}.md`);
         const log = parseAttempts(attemptMd);
         attemptCount = log.attempts.length;
         if (log.latestScore !== undefined) {

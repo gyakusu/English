@@ -1,4 +1,5 @@
 import { cachedFetchRaw } from '../cache.js';
+import { VAULT_READING_DIR } from '../config.js';
 import { parseMockTestSource, MockTestSource } from '../parser/mockTest.js';
 import { setResult } from '../store.js';
 
@@ -80,7 +81,7 @@ export async function renderQuiz(testId: string): Promise<void> {
 
   let source: MockTestSource;
   try {
-    const md = await cachedFetchRaw(`Reading/${testId}_source.md`);
+    const md = await cachedFetchRaw(`${VAULT_READING_DIR}/${testId}_source.md`);
     source = parseMockTestSource(md);
   } catch (e) {
     mainContent.innerHTML = `<p>エラー: ${String(e)}</p>`;
