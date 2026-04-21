@@ -22,6 +22,43 @@ body {
   margin-bottom: 1rem;
 }
 
+.passage h1,
+.passage h2,
+.passage h3,
+.passage h4,
+.passage h5,
+.passage h6 {
+  margin: 1rem 0 0.5rem;
+  line-height: 1.3;
+}
+
+.passage h3 {
+  font-size: 1.1rem;
+}
+
+.passage h4 {
+  font-size: 1rem;
+}
+
+.passage table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.5rem 0 1rem;
+  font-size: 0.95rem;
+}
+
+.passage th,
+.passage td {
+  border: 1px solid #ccc;
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.passage th {
+  background: #eaeaea;
+}
+
 .question {
   margin: 1rem 0;
 }

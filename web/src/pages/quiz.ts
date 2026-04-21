@@ -1,3 +1,4 @@
+import { marked } from 'marked';
 import { cachedFetchRaw } from '../cache.js';
 import { VAULT_READING_DIR } from '../config.js';
 import { parseMockTestSource, MockTestSource } from '../parser/mockTest.js';
@@ -5,16 +6,10 @@ import { setResult } from '../store.js';
 
 let timerIntervalId: ReturnType<typeof setInterval> | null = null;
 
+marked.setOptions({ gfm: true, breaks: true, async: false });
+
 function mdToHtml(text: string): string {
-  const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  const formatted = escaped
-    .replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
-    .replace(/^---$/gm, '<hr />');
-  return formatted
-    .split(/\n\n+/)
-    .map((p) => (p.trim() ? `<p>${p.replace(/\n/g, '<br />')}</p>` : ''))
-    .join('\n');
+  return marked.parse(text) as string;
 }
 
 function stopTimer(): void {
