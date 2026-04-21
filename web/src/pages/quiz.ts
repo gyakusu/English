@@ -4,6 +4,18 @@ import { setResult } from '../store.js';
 
 let timerIntervalId: ReturnType<typeof setInterval> | null = null;
 
+function mdToHtml(text: string): string {
+  const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const formatted = escaped
+    .replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
+    .replace(/^---$/gm, '<hr />');
+  return formatted
+    .split(/\n\n+/)
+    .map((p) => (p.trim() ? `<p>${p.replace(/\n/g, '<br />')}</p>` : ''))
+    .join('\n');
+}
+
 function stopTimer(): void {
   if (timerIntervalId !== null) {
     clearInterval(timerIntervalId);
@@ -53,7 +65,7 @@ ${confidenceHTML}
   const elapsedStr = formatTime(elapsed);
 
   return `<div id="timer">経過: ${elapsedStr} / 目安: ${goalMinStr}min</div>
-<div class="passage">${source.passage.replace(/\n/g, '<br />')}</div>
+<div class="passage">${mdToHtml(source.passage)}</div>
 ${questionsHTML}
 <button id="submit-btn">提出</button>
 <input type="hidden" id="total-goal-sec" value="${String(totalGoalSec)}" />`;
