@@ -23,3 +23,12 @@ score_part7: 1/2
 - **beverage** — 飲み物
 - **catering** — ケータリング、配膳
 - **in the event of** — 〜の場合には
+
+## Attempt 2026-04-21T09:48:11.603+09:00
+- score: 2/2
+- elapsed: 00:00:38
+- answers: [B, C]
+- mistakes:
+
+| Q | My answer | Correct | Confidence |
+|---|-----------|---------|------------|
