@@ -5,7 +5,7 @@ description: vault/Reading/ にある TOEIC 模試の英文解釈・文法を高
 
 # reading — TOEIC 読解・文法ガイド
 
-ユーザは `vault/Reading/MockTestN_source.md` にある TOEIC 模試の英文で詰まっている。文の解釈、文法項目、語彙を**高校英語教師レベルの日本語**でガイドする。
+ユーザは `vault/Reading/MockTestNNN_source.md` (番号は 3 桁ゼロ埋め) にある TOEIC 模試の英文で詰まっている。文の解釈、文法項目、語彙を**高校英語教師レベルの日本語**でガイドする。
 
 このスキルが扱うのは `vault/Reading/` の passage に関する質問のみ。passage と無関係な一般的な文法質問には発動しない。
 
@@ -13,10 +13,10 @@ description: vault/Reading/ にある TOEIC 模試の英文解釈・文法を高
 
 ## ステップ1: 該当 MockTest を特定する
 
-ユーザの発言から「N番」「MockTest N」「テスト N」「N のやつ」などの番号参照を拾い、`vault/Reading/MockTestN_source.md` を Read する。
+ユーザの発言から「N番」「MockTest N」「テスト N」「N のやつ」などの番号参照を拾い、`vault/Reading/MockTestNNN_source.md` (3 桁ゼロ埋め) を Read する。
 
-- 「10番で...」 → `vault/Reading/MockTest10_source.md`
-- 「MockTest5 の最後の文」 → `vault/Reading/MockTest5_source.md`
+- 「10番で...」 → `vault/Reading/MockTest010_source.md`
+- 「MockTest5 の最後の文」 → `vault/Reading/MockTest005_source.md`
 
 番号が明示されないときは直近の会話から推測する。推測もできないときだけ確認する。
 
@@ -118,7 +118,7 @@ M: late ← 副詞
 - Rule: 正しいルール (1-2行)
 - ✗ 間違えやすい解釈・誤答
 - ✓ 正しい解釈・訳
-- Source: [MockTest N, 該当文の冒頭5語程度]
+- Source: [MockTestNNN, 該当文の冒頭5語程度] (番号は 3 桁ゼロ埋め)
 ```
 
 ### 新規ファイルを作るとき
