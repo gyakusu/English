@@ -111,3 +111,14 @@ Elena Rossi
 > 2. **目的問題（Q3）:** メールの冒頭や末尾に目的が集中する。"I am writing regarding..." と最終段落の依頼文を確認。
 > 3. **条件の読み取り（Q5）:** 特典には必ず条件がある。数字（24ヶ月、June 1st）と条件語（must, by, if）に注意。
 > 4. **Cross-reference（Q1・Q2）:** 2つのパッセージをまたいで情報を照合するのがDouble Passageの核心。
+
+## Attempt 2026-04-27T20:06:37.151+09:00
+- score: 0/2
+- elapsed: 00:03:52
+- answers: [C, D]
+- mistakes:
+
+| Q | My answer | Correct | Confidence |
+|---|-----------|---------|------------|
+| 1 | C | B | 迷い |
+| 2 | D | C | 迷い |
